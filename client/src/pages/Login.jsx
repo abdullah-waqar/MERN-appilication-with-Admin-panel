@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
 
-const [userlogin , setUserLogin] = useState({
+
+
+const Login = () => {
+  const [userlogin , setUserLogin] = useState({
   email: "",
   password: ""
 })
 
-const handleSubmit = (e) => {
-
+const handleChange = (e) => {
+  setUserLogin({
+    ...userlogin,
+    [e.target.name]: e.target.value
+  })
 }
 
-const Login = () => {
+const handleSubmit = (e) => {
+  console.log(userlogin);
+  setUserLogin({
+    email: "",
+    password: ""
+  })
+}
+
+
   return (
     <section>
       <div className="container">
@@ -19,13 +33,14 @@ const Login = () => {
 
         <div className="login-form">
           <div>
-            <form >
+            <form action={handleSubmit}>
             <label htmlFor='email'>Email</label>
             <input
               type='email'
               id='email'
               name='email'
               value={userlogin.email}
+              onChange={handleChange}
               placeholder='Enter your email'
               autoComplete='off'
               required
@@ -37,11 +52,12 @@ const Login = () => {
               id="password"
               name="password"
               value={userlogin.password}
+              onChange={handleChange}
               placeholder="Enter your password"
               autoComplete="off"
               required
              />
-            {/* <button type='submit' className='btn btn-primary'>Login</button> */}
+            <button type='submit' className='btn btn-primary'>Login</button>
              </form>
           </div>
         </div>
