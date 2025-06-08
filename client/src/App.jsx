@@ -6,6 +6,7 @@ import Service from './pages/Service.jsx';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import Navbar from './components/Navbar.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 const App = () => {
   return (
    <>
@@ -18,7 +19,7 @@ const App = () => {
           < Route path='/service' element={< Service />} />
           < Route path='/register' element={< Register />} />
           < Route path='/login' element={< Login />} />
-          
+          <Route path='*' element={< ErrorPage />} />
 
         </Routes>
       </BrowserRouter>
