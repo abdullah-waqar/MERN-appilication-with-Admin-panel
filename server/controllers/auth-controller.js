@@ -17,7 +17,7 @@ const register = async (req, res) => {
     try {
         console.log(req.body)
         
-        const {name , email,phone , password} = await req.body;
+        const {name , email , password} = await req.body;
 
         if(await User.findOne({email:email}))
         {
@@ -29,7 +29,6 @@ const register = async (req, res) => {
         const userCreated = await User.create({
             name,
             email,
-            phone,
             password
         });
         

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -8,6 +9,8 @@ const Login = () => {
   password: ""
 })
 
+const navigate = useNavigate();
+
 const handleChange = (e) => {
   setUserLogin({
     ...userlogin,
@@ -15,13 +18,31 @@ const handleChange = (e) => {
   })
 }
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   
   console.log(userlogin);
-  setUserLogin({
-    email: "",
-    password: ""
+  try{
+
+  
+  const response = await fetch('http://localhost:5000/api/auth/login', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userlogin)
   })
+    if(response.ok){
+      setUserLogin({
+        email: "",
+        password: ""
+      });
+        navigate("/");
+    } 
+}
+
+  catch (error) {
+    console.error("Error during login:", error);
+  }
 }
 
 

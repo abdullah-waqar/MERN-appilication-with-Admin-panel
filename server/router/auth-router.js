@@ -11,7 +11,7 @@ const {signupSchema , loginSchema} = require('../validators/auth-validator')
 
 router.route('/').get(home)
 
-router.route("/register").post( validate(signupSchema) , register)
+router.route("/register").post(   register)
 router.route("/login").post(validate(loginSchema) ,  login)
 
 

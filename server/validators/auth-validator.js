@@ -12,13 +12,13 @@ const signupSchema = z.object({
     })
     .trim()
     .email("Invalid email format"),
-  phone: z
-    .string({
-      required_error: "Phone number is required",
-    })
-    .trim()
-    .min(10, "Phone number must be at least 10 characters")
-    .max(15, "Phone number must be at most 15 characters"),
+  // phone: z
+  //   .string({
+  //     required_error: "Phone number is required",
+  //   })
+  //   .trim()
+  //   .min(10, "Phone number must be at least 10 characters")
+  //   .max(15, "Phone number must be at most 15 characters"),
 
   password: z
     .string({ required_error: "Password is required" })

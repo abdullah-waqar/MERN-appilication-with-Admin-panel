@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+
+
+  const navigate = useNavigate();
 
     const [user , setUser] = useState({
         name: "",
         email: "",
         password: "",
         phone: undefined
-    })
+          })
 
     const handleInput = (e) => {
         let name =  e.target.name
@@ -20,16 +23,36 @@ const Register = () => {
 
     }
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    const response  = fetch(`http://localhost:5000/api/auth/register`, {
+    const handleSubmit = async (e) => {
+    
+      console.log("User data:", user);
+    try {
+    const response  = await fetch('http://localhost:5000/api/auth/register', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(user)
     })
+    console.log("Response:", response);
+
+    if(response.ok) {
+        setUser({
+            name: "",
+            email: "",
+            password: "",
+            phone: undefined
+        });
+
+        navigate("/login");
+
     }
+  }
+    catch (error) {
+      console.error("Error during registration:", error);
+    }
+    
+  }
   return (
     <section>
       <main>
@@ -83,8 +106,8 @@ const Register = () => {
                   <label htmlFor="phone">phone</label>
                   <input
                     type="number"
-                    id="number"
-                    name="number"
+                    id="phone"
+                    name="phone"
                     value={user.phone}
                     onChange={handleInput}
                     placeholder="Enter your number"
